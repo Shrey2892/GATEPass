@@ -15,3 +15,6 @@ def login(request):
     #  return HttpResponse(template.render())
     return render(request,'pages-login.html')
 
+
+
+

@@ -43,7 +43,7 @@
 <body>
 
     <main>
-        <form action=""  method="post">
+        <form action="" method="post" id="register-form">
             {% csrf_token %}
 
             <div class="container">
@@ -118,7 +118,8 @@
                                                     Account</button>
                                             </div>
                                             <div class="col-12">
-                                                <p class="small mb-0">Already have an account? <a href="{% url 'login' %}">Log In</a></p>
+                                                <p class="small mb-0">Already have an account? <a
+                                                        href="{% url 'login' %}">Log In</a></p>
                                             </div>
                                         </form>
 
@@ -141,6 +142,14 @@
 
             </div>
         </form>
+
+        <div id="successModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>Success!</h2>
+                <p>Your form has been submitted successfully!</p>
+            </div>
+        </div>
     </main><!-- End #main -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
@@ -158,6 +167,36 @@
 
     <!-- Template Main JS File -->
     <script src="{% static 'assets/js/main.js'%}"></script>
+
+    <script>
+        const modal = document.getElementById("successModal");
+        const closeButton = document.querySelector(".close-button");
+
+        // Listen for form submission
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Simulate successful form submission
+            // (You can replace this with actual AJAX submission logic)
+            setTimeout(() => {
+                modal.style.display = "block"; // Show modal on success
+            }, 500); // Simulate delay
+        });
+
+        // Close modal when the close button is clicked
+        closeButton.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Close modal when clicking outside the modal
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+
 
 </body>
 
