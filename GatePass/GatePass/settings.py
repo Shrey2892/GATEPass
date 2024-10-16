@@ -10,8 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-from pathlib import Path
+from pathlib import Path         #pip install --upgrade pip setuptools wheel : FOR WHEEL BUILD ERROR
 import os
+# import pymysql
+# pymysql.install_as_MySQLdb()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -77,8 +80,19 @@ WSGI_APPLICATION = 'GatePass.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Register',
+        'USER': 'sa',
+        'PASSWORD': 'S@user4wb',
+        'HOST': 'localhost',  # Use '127.0.0.1' or your server's IP
+        'PORT': '1433', 
+        'OPTIONS': {
+            'init_command': "SET NAMES 'utf8mb4'",
+            'connect_timeout': 100,  # Connection timeout
+            'read_timeout': 10,      # Read timeout
+            'write_timeout': 10,     # Write timeout
+        },
+        
     }
 }
 
