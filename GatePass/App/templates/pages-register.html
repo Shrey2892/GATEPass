@@ -43,7 +43,7 @@
 <body>
 
     <main>
-        <form action="" method="post" id="register-form">
+        <form action="" method="post" id="register-form" autocomplete="off">
             {% csrf_token %}
 
             <div class="container">
@@ -114,7 +114,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                <button class="btn btn-primary w-100" type="submit">Create
+                                                <button class="btn btn-primary w-100" type="submit" id="submit-button">Create
                                                     Account</button>
                                             </div>
                                             <div class="col-12">
@@ -143,13 +143,7 @@
             </div>
         </form>
 
-        <div id="successModal" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Success!</h2>
-                <p>Your form has been submitted successfully!</p>
-            </div>
-        </div>
+        
     </main><!-- End #main -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
@@ -168,7 +162,7 @@
     <!-- Template Main JS File -->
     <script src="{% static 'assets/js/main.js'%}"></script>
 
-    <script>
+    <!-- <script>
         const modal = document.getElementById("successModal");
         const closeButton = document.querySelector(".close-button");
 
@@ -194,7 +188,7 @@
                 modal.style.display = "none";
             }
         }
-    </script>
+    </script> -->
 
 
 

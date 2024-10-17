@@ -15,6 +15,18 @@ import os
 # import pymysql
 # pymysql.install_as_MySQLdb()
 
+from mongoengine import connect
+
+#Connect to your MongoDB database
+connect(
+    db ='User',  # replace with your database name
+    host='localhost',         # replace with your MongoDB host
+    port=27017 ,
+    username = 'admin',
+    password = 'Shreya123',
+                                # default MongoDB port
+)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -78,23 +90,23 @@ WSGI_APPLICATION = 'GatePass.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Register',
-        'USER': 'sa',
-        'PASSWORD': 'S@user4wb',
-        'HOST': 'localhost',  # Use '127.0.0.1' or your server's IP
-        'PORT': '1433', 
-        'OPTIONS': {
-            'init_command': "SET NAMES 'utf8mb4'",
-            'connect_timeout': 100,  # Connection timeout
-            'read_timeout': 10,      # Read timeout
-            'write_timeout': 10,     # Write timeout
-        },
+# DATABASES = {
+#     'default': {
+
+# # #         # 'ENGINE': 'django.db.backends.sqlite3',  # Specifies the database engine
+# # #         # 'NAME': BASE_DIR / "db.sqlite3",      
+
+#         'ENGINE': 'mongoengine',
+#         'NAME': 'User',
+#         'USER': 'admin',
+#         'PASSWORD': 'Shreya123',
+#         'HOST': 'localhost',  # Use '127.0.0.1' or your server's IP
+#         'OPTIONS': {
+#             'authSource': 'admin',  # if your user is in the admin db
+#         }
         
-    }
-}
+#     }
+# }
 
 
 # Password validation
