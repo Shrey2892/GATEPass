@@ -14,9 +14,15 @@ from pathlib import Path         #pip install --upgrade pip setuptools wheel : F
 import os
 # import pymysql
 # pymysql.install_as_MySQLdb()
-
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 from mongoengine import connect
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Expire session when the browser is closed
 
+# MONGODB_NAME = 'User'
+# MONGODB_HOST = 'localhost'  # or your MongoDB host
+# MONGODB_PORT = 27017         # default MongoDB port
+MONGODB_USER = 'admin'  # if using authentication
+MONGODB_PASSWORD = 'Shreya123'  # if using authentication
 #Connect to your MongoDB database
 connect(
     db ='User',  # replace with your database name
@@ -93,10 +99,10 @@ WSGI_APPLICATION = 'GatePass.wsgi.application'
 # DATABASES = {
 #     'default': {
 
-# # #         # 'ENGINE': 'django.db.backends.sqlite3',  # Specifies the database engine
+        # 'ENGINE': 'django.db.backends.mongoengine',  # Specifies the database engine
 # # #         # 'NAME': BASE_DIR / "db.sqlite3",      
 
-#         'ENGINE': 'mongoengine',
+#         'ENGINE': 'django.db.backends.dummy',
 #         'NAME': 'User',
 #         'USER': 'admin',
 #         'PASSWORD': 'Shreya123',
@@ -152,3 +158,8 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+LOGIN_URL = '/login/'  # Adjust to match your login URL
+LOGIN_REDIRECT_URL = '/home/'  # Redirect after login

@@ -69,6 +69,10 @@
                                             <p class="text-center small">Enter your username & password to login</p>
                                         </div>
 
+                                        {% if error_message %}
+                                           <div class="alert alert-danger">{{ error_message }}</div>
+                                        {% endif %}
+
                                         <form class="row g-3 needs-validation" novalidate>
 
                                             <div class="col-12">
@@ -123,6 +127,8 @@
 
             </div>
         </form>
+
+        
         <!-- Modal for success message -->
         
         <!-- Modal for success message -->
