@@ -14,9 +14,9 @@ from pathlib import Path         #pip install --upgrade pip setuptools wheel : F
 import os
 # import pymysql
 # pymysql.install_as_MySQLdb()
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
 from mongoengine import connect
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Expire session when the browser is closed
+
 
 # MONGODB_NAME = 'User'
 # MONGODB_HOST = 'localhost'  # or your MongoDB host
@@ -163,3 +163,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/login/'  # Adjust to match your login URL
 LOGIN_REDIRECT_URL = '/home/'  # Redirect after login
+
+# HOME_URL = '/home/'
+# HOME_REDIRECT_URL= 'home/form/'
+
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'
+SESSION_COOKIE_AGE = 1800  # Session expires after 30 minutes

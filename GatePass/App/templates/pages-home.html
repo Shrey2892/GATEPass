@@ -8,6 +8,10 @@
 <body>
     <h1>Hello User</h1>
     <p>You are logged in as {{ user.username }}.</p>
+    <h2> Do you want to create a Gate Pass?</h2>
+    <button type="button" class="btn btn-primary"><a href="{% url 'form' %}">Create</a></button>
+    <a href="{% url 'logout' %}">Logout</a>
+    
   
 </body>
 </html>

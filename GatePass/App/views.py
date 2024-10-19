@@ -1,10 +1,10 @@
 from django.shortcuts import render,redirect
 from django.template import loader
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden,HttpResponse
 from .models import User
 from mongoengine import NotUniqueError,DoesNotExist
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
 
 # Create your views here.
 
@@ -82,7 +82,6 @@ def login(request):
 
 
 
-
 def home(request):
     user_id = request.session.get('user_id')
 
@@ -91,7 +90,35 @@ def home(request):
     try:
        user = User.objects.get(id=user_id)
     except User.DoesNotExist:
+
         return redirect('login')
     
-    return render(request,'pages-home.html',{'user': user})
+    return render(request,'pages-home.html',{'user': user})  
 
+
+def form(request):
+    user_id = request.session.get('user_id')
+
+    if not user_id:
+        return redirect('login') 
+    try:
+       user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+
+        return redirect('login')
+    
+    return render(request,'pages-form.html')
+    
+
+def index(request):
+    template = loader.get_template('pages-index.html')
+    return HttpResponse(template.render())
+    # return render (request,'pages-index.html')
+
+    # return render(request,'pages-index.html')
+
+
+def logout_view(request):
+    # Clear session data
+    logout(request)  # This will clear the session
+    return redirect('home') 
