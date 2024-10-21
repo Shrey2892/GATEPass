@@ -1,10 +1,11 @@
 from django.shortcuts import render,redirect
 from django.template import loader
 from django.http import HttpResponseForbidden,HttpResponse
-from .models import User
+from .models import User,Gatepass
 from mongoengine import NotUniqueError,DoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login,logout
+from datetime import datetime
 
 # Create your views here.
 
@@ -95,19 +96,162 @@ def home(request):
     
     return render(request,'pages-home.html',{'user': user})  
 
-
-def form(request):
-    user_id = request.session.get('user_id')
-
-    if not user_id:
-        return redirect('login') 
-    try:
-       user = User.objects.get(id=user_id)
-    except User.DoesNotExist:
-
-        return redirect('login')
-    
+def get_form(request):
     return render(request,'pages-form.html')
+    
+
+def submit_form(request):
+    
+    if request.method == 'POST':
+
+    #     visitor_name = request.POST.get('visitor_name')
+    #     purpose = request.POST.get('purpose')
+    #     created_at = request.POST.get('created_at')
+
+    #     print(f"Visitor Name: {visitor_name}, Purpose: {purpose}")  # Debugging line
+    #     gatepass = Gatepass(
+    #         visitor_name=visitor_name, 
+    #         purpose=purpose, 
+    #         created_at=datetime.now()
+    #     )
+    #     gatepass.save()
+    #     return redirect('main')
+    # return render(request, 'pages-form.html')
+        
+        driver_name = request.POST.get('driver_name')
+        purpose = request.POST.get('purpose')
+        gatepassno =request.POST.get('gatepassno')
+        vehicle_number=request.POST.get('vehicle_number')
+        owner_contact_no=request.POST.get('owner_contact_no')
+        Access_Area=request.POST.get('Access_Area')
+       
+
+       
+        errors = {}
+        if not driver_name:
+            errors['driver_name'] = 'Visitor name is required.'
+        if not purpose:
+            errors['purpose'] = 'Purpose is required.'
+        if not gatepassno:
+            errors['gatepassno'] = 'GatePass No. should be allocated.'
+        
+        if not vehicle_number:
+            errors['vehicle_number'] = 'Vehicle number is required.'
+        
+        if not owner_contact_no:
+            errors['owner_contact_no'] = 'Conatct number  is required.'
+
+        if not Access_Area:
+            errors['Access_Area'] = 'Access Area needs to be allocated.'
+        if errors:
+            # Re-render the form with errors if validation fails
+            return render(request, 'pages-form.html', {
+                'errors': errors,
+                'driver_name':driver_name,
+                'purpose': purpose,
+                'gatepassno':gatepassno,
+                'vehicle_number':vehicle_number,
+                'owner_contact_no':owner_contact_no,
+                'Access_Area':Access_Area
+                
+            })
+        
+        try:
+            gatepass = Gatepass(
+                gatepassno=gatepassno,
+                vehicle_number=vehicle_number,
+                owner_contact_no=owner_contact_no,
+                driver_name=driver_name,
+                purpose=purpose,
+                Access_Area=Access_Area,
+                created_at=datetime.now(),
+                  # Use current timestamp
+            )
+            
+            gatepass.save()  # Save to MongoDB
+            return redirect('receipt', gatepass_id=gatepass.id)  #Redirect after success
+        except Exception as e:
+            errors['database'] = str(e)
+            return render(request, 'pages-form.html', {
+                'errors': errors,
+                'gatepassno':gatepassno,
+                'vehicle_number':vehicle_number,
+                'driver_name': driver_name,
+                'purpose': purpose,
+                'Access_Area':Access_Area,
+
+                
+            })
+
+    
+
+       
+       
+       
+       
+       
+       
+       
+       
+       
+        # form = Gatepass(request.POST)
+#         if form.is_valid():
+            
+#             # Create a new Gatepass document using keyword arguments
+#             form = Gatepass(
+            
+#                 visitor_name=form.cleaned_data['visitor_name'],
+#                 purpose=form.cleaned_data['purpose'],
+#                 created_at=form.cleaned_data.get('created_at', datetime.now())  # Default to now if not provided
+#             )
+#             form.save()  # Save to MongoDB
+#             return redirect('home')  # Redirect after success
+#    else:
+#         form = Gatepass()  # Initialize a new form instance for GET request
+
+#    return render(request, 'pages-form.html', {'form': form}) 
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    # user_id = request.session.get('user_id')
+
+        
+
+    # if not user_id:
+    #     return redirect('login') 
+    # try:
+    #    user = User.objects.get(id=user_id)
+       
+    # except User.DoesNotExist:
+
+    #     return redirect('login')
+    
+    # if request.method == 'POST':
+    #     form = Gatepass(request.POST)
+    #     if form.is_valid():
+    #         # Create a new Gatepass document
+    #         user_data = Gatepass(
+    #             visitor_name=form.cleaned_data['visitor_name'],
+    #             purpose=form.cleaned_data['purpose'],
+    #             created_at=form.cleaned_data['created_at']
+    #         )
+    #         user_data.save()  # Save to MongoDB
+    #         return redirect('home')  # Redirect after success
+    # else:
+    #     form = Gatepass() 
+    
+    # return render(request,'pages-form.html',{'form': form, 'user': user})
     
 
 def index(request):
@@ -121,4 +265,27 @@ def index(request):
 def logout_view(request):
     # Clear session data
     logout(request)  # This will clear the session
-    return redirect('home') 
+    
+
+
+# def submit_form(request):
+#     if request.method == 'POST':
+#         form = Gatepass(request.POST)
+#         if form.is_valid():
+#             # Create a new UserForm document
+#             user_data = Gatepass(
+#                 visitor_name= form.cleaned_data['visitor_name'],
+#                 purpose=form.cleaned_data['purpose'],
+#                 created_at=form.cleaned_data['created_at']
+#             )
+#             user_data.save()  # Save to MongoDB
+#             return redirect('home')  # Redirect after success
+#         else:
+#             form = Gatepass()
+
+#     return render(request, 'pages-form.html', {'form': form})
+
+def receipt_view(request, gatepass_id):
+
+    gatepass = Gatepass.objects.get(id=gatepass_id)
+    return render(request, 'receipt.html', {'gatepass': gatepass})
