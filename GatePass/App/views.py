@@ -169,7 +169,7 @@ def submit_form(request):
             )
             
             gatepass.save()  # Save to MongoDB
-            return redirect('receipt', gatepass_id=gatepass.id)  #Redirect after success
+            return redirect('receipt_view', gatepass_id=gatepass.id)  #Redirect after success
         except Exception as e:
             errors['database'] = str(e)
             return render(request, 'pages-form.html', {
@@ -266,6 +266,8 @@ def logout_view(request):
     # Clear session data
     logout(request)  # This will clear the session
     
+    # Add any additional actions here
+    return redirect('login')  
 
 
 # def submit_form(request):
