@@ -1,22 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Receipt</title>
+
+
+
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+
+    {% load static %}
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/boxicons/css/boxicons.min.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/quill/quill.snow.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/quill/quill.bubble.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/remixicon/remixicon.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/simple-datatables/style.css'%}">
+
+    <!-- Template Main CSS File -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css'%}">
+    <!-- <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: left;
+        }
+        h1 {
+            text-align: center;
+        }
+        @media print {
+            button {
+                display: none;
+            }
+        }
+    </style> -->
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+            /* Center vertically */
+            height: 100vh;
+            /* Full viewport height */
+            margin: 0;
+            /* Remove default body margin */
+        }
+
+        .card {
+            width: 80%;
+            /* Adjust width as needed */
+            max-width: 600px;
+            /* Set a max width for the card */
+            margin: 20px;
+            /* Optional margin */
+        }
+
+        @media print {
+            button,a {
+                display: none;
+            }
+        }
+        
+    </style>
 </head>
+
 <body>
-    <h1>Receipt</h1>
-    <p><strong>Gate Pass No.:</strong> {{ gatepass.gatepassno }}</p>
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title" {text-align:center;}>Receipt</h1>
+            <!-- <p>Add <code>.table-bordered</code> for borders on all sides of the table and cells.</p> -->
+            <!-- Bordered Table -->
+
+
+            <!-- <p><strong>Created At:</strong> {{ gatepass.created_at }}</p> -->
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+
+                        <th>Created At</th>
+                        <td>{{ gatepass.created_at }}</td>
+                        <th>Gate Pass No.</th>
+                        <td>{{ gatepass.gatepassno }}</td>
+                        <th>Token</th>
+                        <td>{{ gatepass.token}}</td>
+                    </tr>
+                    <tr>
+                        <th>Vehicle Number</th>
+                        <td>{{ gatepass.vehicle_number }}</td>
+                        <th>Driver Name</th>
+                        <td>{{ gatepass.driver_name }}</td>
+                        <th>Contact Number</th>
+                        <td>{{ gatepass.owner_contact_no }}</td>
+                    </tr>
+                    <tr>
+                        <th>Purpose</th>
+                        <td>{{ gatepass.purpose }}</td>
+                        <th>Access Area</th>
+                        <td>{{ gatepass.Access_Area }}</td>
+                        <th>Restricted Area</th>
+                        <td>{{ gatepass.Restricted_Area }}</td>
+
+                    </tr>
+
+                </thead>
+                <!-- <tbody>
+                    <tr>
+                        <td>{{ gatepass.created_at }}</td>
+                        <td>{{ gatepass.gatepassno }}</td>
+                    
+                    
+                        <td>{{ gatepass.vehicle_number }}</td>
+                        <td>{{ gatepass.driver_name }}</td>
+                        <td>{{ gatepass.owner_contact_no }}</td>
+                    
+                    
+                        <td>{{ gatepass.purpose }}</td>
+                        <td>{{ gatepass.Access_Area }}</td>
+                    </tr>
+                </tbody> -->
+            </table>
+        </div>
+    </div>
+
+    <!-- <p><strong>Gate Pass No.:</strong> {{ gatepass.gatepassno }}</p>
     <p><strong>Driver Name:</strong> {{ gatepass.driver_name }}</p>
     <p><strong>Vehicle Number:</strong> {{ gatepass.vehicle_number }}</p>
     <p><strong>Contact Number:</strong> {{ gatepass.owner_contact_no }}</p>
     <p><strong>Access Area:</strong> {{ gatepass.Access_Area}}</p>
     <p><strong>Purpose:</strong> {{ gatepass.purpose }}</p>
-    <p><strong>Created At:</strong> {{ gatepass.created_at }}</p>
+    <p><strong>Created At:</strong> {{ gatepass.created_at }}</p> -->
 
 
-    <a href="{% url 'form' %}">Back to Form</a>
 
+    <button onclick="window.print()">Print Receipt</button>
+    
+    <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'assets/vendor/chart.js/chart.umd.js'%}"></script>
+    <script src="{% static 'assets/vendor/echarts/echarts.min.js'%}"></script>
+    <script src="{% static 'assets/vendor/quill/quill.js'%}"></script>
+    <script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js'%}"></script>
+    <script src="{% static 'assets/vendor/tinymce/tinymce.min.js'%}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js'%}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js'%}"></script>
 </body>
+
 </html>
