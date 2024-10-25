@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Outpass</title>
+    {% load static %}
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css'%}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css'%}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/boxicons/css/boxicons.min.css'%}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/quill/quill.snow.css'%}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/quill/quill.bubble.css'%}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/remixicon/remixicon.css'%}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/simple-datatables/style.css'%}">
+
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" href="{% static 'assets/css/style.css'%}">
+  <style>
+    body{
+        margin-left:70px;
+        margin-top:50px;
+    }
+  </style>
+</head>
+<body>
+    <h2>Delete Gatepass</h2>
+    <form method="post" action="{% url 'delete_outpass' %}">
+        {% csrf_token %}
+        <label for="gatepassno">Gatepass No:</label>
+        <input type="text" id="gatepassno" name="gatepassno" required>
+        <button type="submit">Delete Gatepass</button>
+    </form>
+</body>
+</html>

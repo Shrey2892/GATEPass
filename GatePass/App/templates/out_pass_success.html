@@ -87,10 +87,10 @@
 </head>
 
 <body>
-    
     <div class="card">
         <div class="card-body">
-            <h1 class="card-title" {text-align:center;}>Receipt</h1>
+            <h1 class="card-title" {text-align:center;}>Outpass Receipt: {{ outpass }} <!-- This will show the entire object -->
+            </h1>
             <!-- <p>Add <code>.table-bordered</code> for borders on all sides of the table and cells.</p> -->
             <!-- Bordered Table -->
 
@@ -101,27 +101,27 @@
                     <tr>
 
                         <th>Created At</th>
-                        <td>{{ gatepass.created_at }}</td>
+                        <td>{{ out_pass.created_at }}</td>
                         <th>Gate Pass No.</th>
-                        <td>{{ gatepass.gatepassno }}</td>
+                        <td>{{ out_pass.gatepassno }}</td>
                         <th>Token</th>
-                        <td>{{ gatepass.token}}</td>
+                        <td>{{ out_pass.token}}</td>
                     </tr>
                     <tr>
                         <th>Vehicle Number</th>
-                        <td>{{ gatepass.vehicle_number }}</td>
+                        <td>{{ out_pass.vehicle_number }}</td>
                         <th>Driver Name</th>
-                        <td>{{ gatepass.driver_name }}</td>
+                        <td>{{ out_pass.driver_name }}</td>
                         <th>Contact Number</th>
-                        <td>{{ gatepass.owner_contact_no }}</td>
+                        <td>{{ out_pass.owner_contact_no }}</td>
                     </tr>
                     <tr>
                         <th>Purpose</th>
-                        <td>{{ gatepass.purpose }}</td>
+                        <td>{{ out_pass.purpose }}</td>
                         <th>Access Area</th>
-                        <td>{{ gatepass.Access_Area }}</td>
+                        <td>{{ out_pass.Access_Area }}</td>
                         <th>Restricted Area</th>
-                        <td>{{ gatepass.Restricted_Area }}</td>
+                        <td>{{ out_pass.Restricted_Area }}</td>
 
                     </tr>
 
@@ -156,9 +156,7 @@
 
 
     <button onclick="window.print()">Print Receipt</button>
-    
-
-    <a href="{% url 'update_gatepass' gatepassno=gatepass.gatepassno %}">Edit Submission</a>
+    <a href="{% url 'update_outpass' gatepassno=out_pass.gatepassno %}">Edit Submission</a>
     <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
     <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
     <script src="{% static 'assets/vendor/chart.js/chart.umd.js'%}"></script>

@@ -158,7 +158,7 @@
     <button onclick="window.print()">Print Receipt</button>
     
 
-    <a href="{% url 'update_gatepass' gatepassno=gatepass.gatepassno %}">Edit Submission</a>
+    <a href="{% url 'edit_out_pass' gatepassno=gatepass.gatepassno %}">Edit Submission</a>
     <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
     <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
     <script src="{% static 'assets/vendor/chart.js/chart.umd.js'%}"></script>

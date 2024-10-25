@@ -101,27 +101,27 @@
                     <tr>
 
                         <th>Created At</th>
-                        <td>{{ gatepass.created_at }}</td>
+                        <td>{{ outpass.created_at }}</td>
                         <th>Gate Pass No.</th>
-                        <td>{{ gatepass.gatepassno }}</td>
+                        <td>{{ outpass.gatepassno }}</td>
                         <th>Token</th>
-                        <td>{{ gatepass.token}}</td>
+                        <td>{{ outpass.token}}</td>
                     </tr>
                     <tr>
                         <th>Vehicle Number</th>
-                        <td>{{ gatepass.vehicle_number }}</td>
+                        <td>{{ outpass.vehicle_number }}</td>
                         <th>Driver Name</th>
-                        <td>{{ gatepass.driver_name }}</td>
+                        <td>{{ outpass.driver_name }}</td>
                         <th>Contact Number</th>
-                        <td>{{ gatepass.owner_contact_no }}</td>
+                        <td>{{ outpass.owner_contact_no }}</td>
                     </tr>
                     <tr>
                         <th>Purpose</th>
-                        <td>{{ gatepass.purpose }}</td>
+                        <td>{{ outpass.purpose }}</td>
                         <th>Access Area</th>
-                        <td>{{ gatepass.Access_Area }}</td>
+                        <td>{{ outpass.Access_Area }}</td>
                         <th>Restricted Area</th>
-                        <td>{{ gatepass.Restricted_Area }}</td>
+                        <td>{{ outpass.Restricted_Area }}</td>
 
                     </tr>
 
@@ -158,7 +158,7 @@
     <button onclick="window.print()">Print Receipt</button>
     
 
-    <a href="{% url 'update_gatepass' gatepassno=gatepass.gatepassno %}">Edit Submission</a>
+    <a href="{% url 'edit_out_pass' gatepassno=outpass.gatepassno %}">Edit Submission</a>
     <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
     <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
     <script src="{% static 'assets/vendor/chart.js/chart.umd.js'%}"></script>
